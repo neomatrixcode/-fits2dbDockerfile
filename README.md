@@ -5,7 +5,11 @@ docker run --rm -it -v C:\Users\Neomatrix\Desktop\data:/data -w /data neomatrixc
 
 ```bash
 fits2db --debug true --sql=postgres --create *.fits
-cat *.sql | psql "postgresql://username:password@host/dbname
+
+for i in *.sql; do
+    [ -f "$i" ] || break
+    cat "$i" | psql "postgresql://username:password@host/dbname"
+done
 ```
 
 Image in Docker hub
